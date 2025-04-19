@@ -7,7 +7,7 @@ Wheel *w_main = nullptr;
 
 void setup()
 {
-	w_main = new Wheel(16, 31, 18);
+	w_main = new Wheel(23, 33, 19);
 	Serial.begin(115200);
 	w_main->setSpeed(12);
 
@@ -15,7 +15,4 @@ void setup()
 	w_main->printConfiguration();
 }
 
-void loop()
-{
-	w_main->printSpeed();
-}
+void loop() {}

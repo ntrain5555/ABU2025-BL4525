@@ -4,12 +4,13 @@
 
 class Wheel
 {
-private:
+public:
     enum direction
     {
         FORWARD,
         BACKWARD
     };
+private:
     struct
     {
         uint8_t pwm;
@@ -32,7 +33,6 @@ public:
 
     void setSpeed(uint8_t speed_target);
     void setDirection(enum direction direction);
-    void printSpeed(void);
     void printConfiguration(void);
 };
 
