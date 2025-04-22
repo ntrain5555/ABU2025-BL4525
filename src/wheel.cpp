@@ -47,23 +47,21 @@ Wheel::Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir, uint8_t pwm_min, 
             if (w->speed.curr == 0) { // Brake
                 pwm = 0;
             } else if (pulse_length == 0 || frequency.curr < frequency.expected) { // Too slow
-                ++pwm;
+                pwm = (pwm >= w->pwm.max) ? w->pwm.max : ++pwm;
             } else if (frequency.curr > frequency.expected) { // Too fast
-                --pwm;
+                pwm = (pwm <= w->pwm.min) ? w->pwm.min : --pwm;
             }
-            pwm = (pwm >= w->pwm.max) ? w->pwm.max : ++pwm;
-            pwm = (pwm <= w->pwm.min) ? w->pwm.min : --pwm;
 #ifdef DEBUG
-        Serial.printf("DIR: %s, OBJSPD: %hd, PWM: %hd, PL: %d, FREQ: %.0lf, E.FREQ: %.0lf, FREQ: %.0lf %.0lf %lf\n",
-                direction == FORWARD ? "FORWARD" : "BACKWARD",
-                w->speed.curr,
-                pwm,
-                pulse_length,
-                frequency.curr,
-                frequency.expected,
-                frequency.min,
-                frequency.max,
-                frequency.step
+            Serial.printf("DIR: %s, OBJSPD: %hd, PWM: %hd, PL: %d, FREQ: %.0lf, E.FREQ: %.0lf, FREQ: %.0lf %.0lf %lf\n",
+                    direction == FORWARD ? "FORWARD" : "BACKWARD",
+                    w->speed.curr,
+                    pwm,
+                    pulse_length,
+                    frequency.curr,
+                    frequency.expected,
+                    frequency.min,
+                    frequency.max,
+                    frequency.step
             );
 #endif
             analogWrite(w->pin.pwm, pwm);
