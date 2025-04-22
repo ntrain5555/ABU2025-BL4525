@@ -10,6 +10,7 @@ public:
         FORWARD,
         BACKWARD
     };
+
 private:
     struct
     {
@@ -27,10 +28,14 @@ private:
         uint8_t min;
         uint8_t max;
     } pwm;
-    uint32_t expected_pulse_length;
+    struct
+    {
+        unsigned long min;
+        unsigned long max;
+    } pl;
 
 public:
-
+    Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir, uint8_t pwm_min, uint8_t pwm_max, unsigned long pl_min, unsigned long pl_max);
     Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir, uint8_t pwm_min, uint8_t pwm_max);
     Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir);
 
