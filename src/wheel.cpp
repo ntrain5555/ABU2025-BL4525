@@ -24,7 +24,7 @@ Wheel::Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir, uint8_t pwm_min, 
         struct frequency frequency = {
             .min = 1E+6 / w->pl.max,
             .max = 1E+6 / w->pl.min,
-            .step = (1E+6 / (w->pl.max - w->pl.min)) / 255.0
+            .step = ((1E+6 / w->pl.min) - (1E+6 / w->pl.max)) / 255.0
         };
         uint32_t pulse_length;
         direction direction = w->speed.direction;
@@ -54,7 +54,7 @@ Wheel::Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir, uint8_t pwm_min, 
             pwm = (pwm >= w->pwm.max) ? w->pwm.max : ++pwm;
             pwm = (pwm <= w->pwm.min) ? w->pwm.min : --pwm;
 #ifdef DEBUG
-        Serial.printf("DIR: %s, OBJSPD: %hd, PWM: %hd, PL: %d, FREQ: %huHz, E.FREQ: %hu, FREQ: %hu %hu %lf\n",
+        Serial.printf("DIR: %s, OBJSPD: %hd, PWM: %hd, PL: %d, FREQ: %.0lf, E.FREQ: %.0lf, FREQ: %.0lf %.0lf %lf\n",
                 direction == FORWARD ? "FORWARD" : "BACKWARD",
                 w->speed.curr,
                 pwm,
