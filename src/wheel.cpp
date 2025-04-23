@@ -70,18 +70,3 @@ Wheel::Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir, uint8_t pwm_min, 
 
 Wheel::Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir, uint8_t pwm_min, uint8_t pwm_max) : Wheel(pin_pwm, pin_fg, pin_dir, pwm_min, pwm_max, 1400UL, 100000UL) {}
 Wheel::Wheel(uint8_t pin_pwm, uint8_t pin_fg, uint8_t pin_dir) : Wheel(pin_pwm, pin_fg, pin_dir, 12, 255) {}
-
-void Wheel::setSpeed(uint8_t speed_target)
-{
-    speed.curr = speed_target;
-}
-
-void Wheel::setDirection(enum direction direction)
-{
-    speed.direction = direction;
-}
-
-void Wheel::printConfiguration(void)
-{
-    Serial.printf("Current pin configuration\nPWM: %hd\nFG: %hd\nDIR: %hd\n", pin.pwm, pin.fg, pin.direction);
-}

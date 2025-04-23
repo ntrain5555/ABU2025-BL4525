@@ -9,8 +9,9 @@ void setup()
 {
 	w_main = new Wheel(23, 33, 19);
 	Serial.begin(115200);
-	w_main->setSpeed(10);
-	w_main->printConfiguration();
+	w_main->speed.curr = 10;
 }
 
-void loop() {}
+void loop() {
+	w_main->speed.direction = Wheel::FORWARD;
+}
